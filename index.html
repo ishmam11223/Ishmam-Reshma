@@ -71,7 +71,6 @@
       font-size: 14px;
     }
   }
-</style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#fff4f0">
@@ -509,6 +508,78 @@
     const dateInput = document.getElementById('dateDay');
     const today = new Date();
     dateInput.min = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-  </script>
+  <script>
+const memories = [
+  {
+    title: "Our First Meet ❤️",
+    folder: "01-first-meet",
+    caption: "The beginning of our beautiful story. ❤️"
+  },
+  {
+    title: "Our Second Meet 💕",
+    folder: "02-second-meet",
+    caption: "Another beautiful memory with you. 💖"
+  },
+  {
+    title: "Our Third Meet 🌹",
+    folder: "03-third-meet",
+    caption: "Every moment with you is special. ❤️"
+  },
+  ...Array.from({ length: 15 }, (_, i) => ({
+    title: `Meet ${i + 4} 💗`,
+    folder: `${String(i + 4).padStart(2, "0")}-meet`,
+    caption: "One more beautiful memory with you. 💕"
+  }))
+];
+
+const container = document.getElementById("meetButtons");
+const photo = document.getElementById("memoryPhoto");
+const title = document.getElementById("memoryTitle");
+const caption = document.getElementById("memoryCaption");
+
+let currentMeet = 1;
+
+function showMeet(number) {
+  currentMeet = number;
+  const memory = memories[number - 1];
+
+  title.textContent = memory.title;
+  caption.textContent = memory.caption;
+
+  photo.onerror = function () {
+    caption.textContent =
+      "Photo not found! Check the folder and photo filename. ❤️";
+    photo.removeAttribute("src");
+  };
+
+  showPhoto(1);
+}
+
+function showPhoto(photoNumber) {
+  const memory = memories[currentMeet - 1];
+
+  photo.onerror = function () {
+    caption.textContent =
+      "Photo not found! Check the folder and photo filename. ❤️";
+    photo.removeAttribute("src");
+  };
+
+  photo.src =
+    `photos/${memory.folder}/photo-${String(photoNumber).padStart(2, "0")}.jpg`;
+
+  caption.textContent = memory.caption;
+}
+
+if (container) {
+  memories.forEach((memory, index) => {
+    const button = document.createElement("button");
+    button.textContent = `Meet ${index + 1}`;
+    button.addEventListener("click", () => showMeet(index + 1));
+    container.appendChild(button);
+  });
+}
+
+showMeet(1);
+</script>
 </body>
 </html>
