@@ -410,7 +410,6 @@
       heartsRain(18);
       showToast('Our date plan is ready! Save it or copy it 💌');
     });
-
     document.getElementById('copyPlan').addEventListener('click', async () => {
       if (!currentPlan) return;
       try {
@@ -428,12 +427,12 @@
         showToast(copied ? 'Date plan copied! 💗' : 'Copy didn’t work—select the plan text manually.');
       }
     });
-
     // Date picker should not offer dates in the past.
     const dateInput = document.getElementById('dateDay');
     const today = new Date();
     dateInput.min = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
   <script>
+    const memories = [
   {
     title: "Our First Meet ❤️",
     folder: "01-first-meet",
