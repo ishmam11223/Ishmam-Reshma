@@ -1,1 +1,0 @@
-Favourite smile photos
